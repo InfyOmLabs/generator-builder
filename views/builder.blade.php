@@ -331,7 +331,7 @@
                         }, 3000);
                     },
                     error: function (result) {
-                        ("#info").html("");
+                        $("#info").html("");
                         $("#info").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail!</strong>result</div>');
                         $("#info").show();
                         setTimeout(function () {
