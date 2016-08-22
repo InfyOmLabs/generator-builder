@@ -318,7 +318,8 @@
 
                 $.ajax({
                     url: '{!! url('') !!}/generator_builder/generate',
-                    type: "POST",
+                   // type: "POST",
+                    method: "POST",
                     dataType: 'json',
                     contentType: 'application/json',
                     data: JSON.stringify(data),
