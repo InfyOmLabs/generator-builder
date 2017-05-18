@@ -286,7 +286,8 @@
                     }
 
                     fieldArr.push({
-                        fieldInput: $(this).find('.txtFieldName').val() + ':' + $(this).find('.txtdbType').val(),
+                        name: $(this).find('.txtFieldName').val(),
+                        dbType: $(this).find('.txtdbType').val(),
                         htmlType: htmlValue,
                         validations: $(this).find('.txtValidation').val(),
                         searchable: $(this).find('.chkSearchable').prop('checked'),
@@ -327,9 +328,13 @@
                         $("#info").html("");
                         $("#info").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + result + '</strong></div>');
                         $("#info").show();
+                        var $container = $("html,body");
+                        var $scrollTo = $('#info');
+                        $container.animate({scrollTop: $scrollTo.offset().top - $container.offset().top, scrollLeft: 0},300);
                         setTimeout(function () {
                             $('#info').fadeOut('fast');
                         }, 3000);
+                        location.reload();
                     },
                     error: function (result) {
                         $("#info").html("");
