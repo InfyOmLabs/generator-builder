@@ -23,7 +23,7 @@
         <option value="binary">Binary</option>
         <option value="password">Password</option>
         <option value="date">Date</option>
-        <option value="dateTime">DateTime</option>
+        <option value="datetime">DateTime</option>
         <option value="timestamp">Timestamp</option>
     </select>
 
