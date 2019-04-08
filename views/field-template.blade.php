@@ -5,9 +5,9 @@
     <select class="form-control txtdbType" style="width: 100%">
         <option value="increments">Increments</option>
         <option value="integer">Integer</option>
-        <option value="smallinteger">SmallInteger</option>
+        <option value="smallInteger">SmallInteger</option>
         <option value="long">Long</option>
-        <option value="biginteger">BigInteger</option>
+        <option value="bigInteger">BigInteger</option>
         <option value="double">Double</option>
         <option value="float">Float</option>
         <option value="real">Real</option>
