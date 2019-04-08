@@ -6,23 +6,20 @@
         <option value="increments">Increments</option>
         <option value="integer">Integer</option>
         <option value="smallInteger">SmallInteger</option>
-        <option value="long">Long</option>
+        <option value="longText">LongText</option>
         <option value="bigInteger">BigInteger</option>
         <option value="double">Double</option>
         <option value="float">Float</option>
-        <option value="real">Real</option>
         <option value="decimal">Decimal</option>
         <option value="boolean">Boolean</option>
         <option value="string">String</option>
         <option value="char">Char</option>
         <option value="text">Text</option>
-        <option value="mediumtext">Mediumtext</option>
-        <option value="longtext">Longtext</option>
+        <option value="mediumText">MediumText</option>
+        <option value="longText">LongText</option>
         <option value="enum">Enum</option>
-        <option value="byte">Byte</option>
         <option value="binary">Binary</option>
-        <option value="password">Password</option>
-        <option value="datetime">DateTime</option>
+        <option value="dateTime">DateTime</option>
         <option value="date">Date</option>
         <option value="timestamp">Timestamp</option>
     </select>
