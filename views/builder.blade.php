@@ -308,6 +308,8 @@
                     options: {
                         softDelete: $('#chkDelete').prop('checked'),
                         save: $('#chkSave').prop('checked'),
+                    },
+                    addOns: {
                         swagger: $('#chkSwagger').prop('checked'),
                         tests: $('#chkTestCases').prop('checked'),
                         datatables: $('#chkDataTable').prop('checked')
