@@ -360,6 +360,7 @@
                 $(el).find('.chkPrimary').attr('checked', true);
                 $(el).find('.chkInForm').attr('checked', false);
                 $(el).find('.chkInIndex').attr('checked', false);
+                $(el).find('.drdHtmlType').val('number').trigger('change');
             }
 
             function renderTimeStampData(el) {
