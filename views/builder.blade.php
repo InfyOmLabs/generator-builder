@@ -308,6 +308,8 @@
                     options: {
                         softDelete: $('#chkDelete').prop('checked'),
                         save: $('#chkSave').prop('checked'),
+                        prefix: $('#txtPrefix').val(),
+                        paginate: $('#txtPaginate').val(),
                         swagger: $('#chkSwagger').prop('checked'),
                         tests: $('#chkTestCases').prop('checked'),
                         datatables: $('#chkDataTable').prop('checked')
