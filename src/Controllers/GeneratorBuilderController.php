@@ -7,6 +7,7 @@ use Artisan;
 use File;
 use InfyOm\GeneratorBuilder\Requests\BuilderGenerateRequest;
 use Response;
+use Request;
 
 class GeneratorBuilderController extends Controller
 {
@@ -30,6 +31,18 @@ class GeneratorBuilderController extends Controller
         ]);
 
         return Response::json("Files created successfully");
+    }
+
+    public function rollback()
+    {
+        $data = Request::all();
+
+        Artisan::call('infyom:rollback', [
+            'model' => $data['modelName'],
+            'type'  => $data['commandType'],
+        ]);
+
+        return Response::json(['message' => 'Files rollback successfully'], 200);
     }
 
 //    public function availableSchema()
