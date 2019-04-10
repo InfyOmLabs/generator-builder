@@ -229,10 +229,14 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4">
-                        <button style="margin-top: 25px" type="submit" class="btn btn-flat btn-primary btn-blue"
-                                id="btnRollback">
-                            Rollback
-                        </button>
+                        <label for="txtRBPrefix">Prefix</label>
+                        <input type="text" class="form-control" id="txtRBPrefix" placeholder="Enter prefix">
+                    </div>
+                    <div class="form-inline col-md-12" style="padding:15px 15px;text-align: right">
+                        <div class="form-group" style="border-color: transparent;padding-left: 10px">
+                            <button type="submit" class="btn btn-flat btn-primary btn-blue" id="btnRollback">Rollback
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -385,11 +389,11 @@
 
             $('#formRollback').on("submit", function (e) {
                 e.preventDefault();
-                var modelName = $('#txtRBModelName').val();
-                var commandType = $('#drdRBCommandType').val();
+
                 var data = {
-                    modelName: modelName,
-                    commandType: commandType,
+                    modelName: $('#txtRBModelName').val(),
+                    commandType: $('#drdRBCommandType').val(),
+                    prefix: $('#txtRBPrefix').val(),
                     _token: $('#rollbackFormToken').val()
                 };
 
