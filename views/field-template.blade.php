@@ -42,6 +42,7 @@
         <option value="radio">Radio</option>
         <option value="checkbox">Checkbox</option>
         <option value="textarea">TextArea</option>
+        <option value="toggle-switch">Toggle</option>
     </select>
     <input type="text" class="form-control htmlValue txtHtmlValue" style="display: none"
            placeholder=""/>
