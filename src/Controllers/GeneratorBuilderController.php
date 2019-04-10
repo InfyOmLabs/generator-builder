@@ -5,6 +5,7 @@ namespace InfyOm\GeneratorBuilder\Controllers;
 use App\Http\Controllers\Controller;
 use Artisan;
 use File;
+use Illuminate\Support\Collection;
 use InfyOm\GeneratorBuilder\Requests\BuilderGenerateRequest;
 use Response;
 
@@ -24,12 +25,33 @@ class GeneratorBuilderController extends Controller
     {
         $data = $request->all();
 
+        // Validate fields
+        if (isset($data['fields'])) {
+            $this->validateFields($data['fields']);
+        }
+
         $res = Artisan::call($data['commandType'], [
             'model' => $data['modelName'],
             '--jsonFromGUI' => json_encode($data)
         ]);
 
         return Response::json("Files created successfully");
+    }
+
+    private function validateFields($fields)
+    {
+        $fieldsGroupBy = collect($fields)->groupBy(function ($item) {
+            return strtolower($item['name']);
+        });
+
+        $duplicateFields = $fieldsGroupBy->filter(function (Collection $groups) {
+            return $groups->count() > 1;
+        });
+        if (count($duplicateFields)) {
+            throw new \Exception('Duplicate fields are not allowed');
+        }
+
+        return true;
     }
 
 //    public function availableSchema()
