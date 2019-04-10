@@ -36,7 +36,6 @@ class GeneratorBuilderController extends Controller
     public function rollback()
     {
         $data = Request::all();
-
         $input = [
             'model' => $data['modelName'],
             'type'  => $data['commandType'],
@@ -47,7 +46,6 @@ class GeneratorBuilderController extends Controller
         }
 
         Artisan::call('infyom:rollback', $input);
-
 
         return Response::json(['message' => 'Files rollback successfully'], 200);
     }

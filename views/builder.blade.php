@@ -213,8 +213,8 @@
                 <h1 class="box-title" style="font-size: 30px">Rollback</h1>
             </div>
             <div class="box-body">
-                <form id="formRollback">
-                    <input type="hidden" name="_token" id="rollbackFormToken" value="{!! csrf_token() !!}"/>
+                <form id="rollbackForm">
+                    <input type="hidden" name="_token" id="rbToken" value="{!! csrf_token() !!}"/>
 
                     <div class="form-group col-md-4">
                         <label for="txtRBModelName">Model Name<span class="required">*</span></label>
@@ -387,14 +387,14 @@
                 return false;
             });
 
-            $('#formRollback').on("submit", function (e) {
+            $('#rollbackForm').on("submit", function (e) {
                 e.preventDefault();
 
                 var data = {
                     modelName: $('#txtRBModelName').val(),
                     commandType: $('#drdRBCommandType').val(),
                     prefix: $('#txtRBPrefix').val(),
-                    _token: $('#rollbackFormToken').val()
+                    _token: $('#rbToken').val()
                 };
 
                 $.ajax({
