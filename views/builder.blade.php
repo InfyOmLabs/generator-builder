@@ -339,8 +339,14 @@
                         location.reload();
                     },
                     error: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+                        var errorMessage = '';
+                        if (result.hasOwnProperty('responseJSON') && result.responseJSON.hasOwnProperty('message')) {
+                            errorMessage = result.responseJSON.message;
+                        }
+
                         $("#info").html("");
-                        $("#info").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail!</strong>result</div>');
+                        $("#info").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail! </strong>' + errorMessage + '</div>');
                         $("#info").show();
                         setTimeout(function () {
                             $('#info').fadeOut('fast');
