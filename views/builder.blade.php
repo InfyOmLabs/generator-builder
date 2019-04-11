@@ -480,6 +480,7 @@
                     $("#schemaInfo").html("");
                     $("#schemaInfo").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Schema file must be json</strong></div>');
                     $("#schemaInfo").show();
+                    $(this).replaceWith($(this).val('').clone(true));
                     setTimeout(function () {
                         $('div.alert').fadeOut('fast');
                     }, 3000);
