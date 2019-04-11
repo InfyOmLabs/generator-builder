@@ -494,6 +494,7 @@
                 formData.append('modelName', $('#txtSmModelName').val());
                 formData.append('commandType', $('#drdSmCommandType').val());
                 formData.append('schemaFile', $('#schemaFile').prop('files')[0]);
+                formData.append('_token', $('#smToken').val());
 
                 $.ajax({
                     url: '{!! url('') !!}/generator_builder/load-schema',
@@ -501,8 +502,6 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    // Remove below line if you are already passing `X-CSRF-TOKEN` into ajax request headers
-                    beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $('#smToken').val());},
                     success: function (result) {
                         var result = JSON.parse(JSON.stringify(result));
 
