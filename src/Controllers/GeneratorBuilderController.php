@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Artisan;
 use File;
 use InfyOm\GeneratorBuilder\Requests\BuilderGenerateRequest;
+use Illuminate\Http\UploadedFile;
 use Response;
 use Request;
 
@@ -48,6 +49,27 @@ class GeneratorBuilderController extends Controller
         Artisan::call('infyom:rollback', $input);
 
         return Response::json(['message' => 'Files rollback successfully'], 200);
+    }
+
+    public function loadSchema()
+    {
+        $data = Request::all();
+
+        /** @var UploadedFile $file */
+        $file = $data['schemaFile'];
+        $filePath = $file->getRealPath();
+        $extension = $file->getClientOriginalExtension(); // getting file extension
+        if ($extension != 'json') {
+            throw new \Exception('Schema file must be Json');
+        }
+
+        Artisan::call($data['commandType'], [
+            'model'          => $data['modelName'],
+            '--fieldsFile'   => $filePath,
+            '--forceMigrate' => true,
+        ]);
+
+        return Response::json(['message' => 'Files created successfully'], 200);
     }
 
 //    public function availableSchema()
