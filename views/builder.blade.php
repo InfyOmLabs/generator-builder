@@ -279,7 +279,7 @@
                     var htmlType = $(this).find('.drdHtmlType');
                     var htmlValue = "";
                     if ($(htmlType).val() == "select" || $(htmlType).val() == "radio") {
-                        htmlValue = $(this).find('.drdHtmlType').val() + ':' + $(this).find('.txtHtmlValue').val();
+                        htmlValue = $(this).find('.drdHtmlType').val() + ',' + $(this).find('.txtHtmlValue').val();
                     }
                     else {
                         htmlValue = $(this).find('.drdHtmlType').val();
