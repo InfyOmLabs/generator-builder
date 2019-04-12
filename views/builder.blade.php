@@ -255,15 +255,15 @@
                     <input type="hidden" name="_token" id="smToken" value="{!! csrf_token() !!}"/>
                     <div class="form-group col-md-4">
                         <label for="txtSmModelName">Model Name<span class="required">*</span></label>
-                        <input type="text" class="form-control" id="txtSmModelName" placeholder="Enter Model Name">
+                        <input type="text" name="modelName" class="form-control" id="txtSmModelName" placeholder="Enter Model Name">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="schemaFile">Schema File<span class="required">*</span></label>
-                        <input type="file" class="form-control" required id="schemaFile">
+                        <input type="file" name="schemaFile" class="form-control" required id="schemaFile">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="drdSmCommandType">Command Type</label>
-                        <select id="drdSmCommandType" class="form-control" style="width: 100%">
+                        <select name="commandType" id="drdSmCommandType" class="form-control" style="width: 100%">
                             <option value="infyom:api_scaffold">API Scaffold Generator</option>
                             <option value="infyom:api">API Generator</option>
                             <option value="infyom:scaffold">Scaffold Generator</option>
@@ -490,16 +490,10 @@
             $('#schemaForm').on("submit", function (e) {
                 e.preventDefault();
 
-                var formData =  new FormData();
-                formData.append('modelName', $('#txtSmModelName').val());
-                formData.append('commandType', $('#drdSmCommandType').val());
-                formData.append('schemaFile', $('#schemaFile').prop('files')[0]);
-                formData.append('_token', $('#smToken').val());
-
                 $.ajax({
                     url: '{!! url('') !!}/generator_builder/load-schema',
                     type: 'POST',
-                    data: formData,
+                    data: new FormData($(this)[0]),
                     processData: false,
                     contentType: false,
                     success: function (result) {
@@ -510,7 +504,10 @@
                         $("#schemaInfo").show();
                         var $container = $("html,body");
                         var $scrollTo = $('#schemaInfo');
-                        $container.animate({scrollTop: $scrollTo.offset().top - $container.offset().top, scrollLeft: 0},300);
+                        $container.animate({
+                            scrollTop: $scrollTo.offset().top - $container.offset().top,
+                            scrollLeft: 0
+                        }, 300);
                         setTimeout(function () {
                             $('#schemaInfo').fadeOut('fast');
                         }, 3000);
