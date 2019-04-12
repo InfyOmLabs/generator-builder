@@ -8,6 +8,7 @@ use File;
 use Illuminate\Support\Collection;
 use InfyOm\GeneratorBuilder\Requests\BuilderGenerateRequest;
 use Response;
+use Request;
 
 class GeneratorBuilderController extends Controller
 {
@@ -36,6 +37,23 @@ class GeneratorBuilderController extends Controller
         ]);
 
         return Response::json("Files created successfully");
+    }
+
+    public function rollback()
+    {
+        $data = Request::all();
+        $input = [
+            'model' => $data['modelName'],
+            'type'  => $data['commandType'],
+        ];
+
+        if (!empty($data['prefix'])) {
+            $input['--prefix'] = $data['prefix'];
+        }
+
+        Artisan::call('infyom:rollback', $input);
+
+        return Response::json(['message' => 'Files rollback successfully'], 200);
     }
 
     private function validateFields($fields)

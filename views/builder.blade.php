@@ -205,6 +205,44 @@
         </div>
     </section>
 </div>
+<div class="col-md-10 col-md-offset-1">
+    <section class="content">
+        <div id="rollbackInfo" style="display: none"></div>
+        <div class="box box-primary col-lg-12">
+            <div class="box-header" style="margin-top: 10px">
+                <h1 class="box-title" style="font-size: 30px">Rollback</h1>
+            </div>
+            <div class="box-body">
+                <form id="rollbackForm">
+                    <input type="hidden" name="_token" id="rbToken" value="{!! csrf_token() !!}"/>
+
+                    <div class="form-group col-md-4">
+                        <label for="txtRBModelName">Model Name<span class="required">*</span></label>
+                        <input type="text" class="form-control" required id="txtRBModelName" placeholder="Enter name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="drdRBCommandType">Command Type</label>
+                        <select id="drdRBCommandType" class="form-control" style="width: 100%">
+                            <option value="api_scaffold">API Scaffold Generator</option>
+                            <option value="api">API Generator</option>
+                            <option value="scaffold">Scaffold Generator</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="txtRBPrefix">Prefix</label>
+                        <input type="text" class="form-control" id="txtRBPrefix" placeholder="Enter prefix">
+                    </div>
+                    <div class="form-inline col-md-12" style="padding:15px 15px;text-align: right">
+                        <div class="form-group" style="border-color: transparent;padding-left: 10px">
+                            <button type="submit" class="btn btn-flat btn-primary btn-blue" id="btnRollback">Rollback
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -355,6 +393,57 @@
                 });
 
                 return false;
+            });
+
+            $('#rollbackForm').on("submit", function (e) {
+                e.preventDefault();
+
+                var data = {
+                    modelName: $('#txtRBModelName').val(),
+                    commandType: $('#drdRBCommandType').val(),
+                    prefix: $('#txtRBPrefix').val(),
+                    _token: $('#rbToken').val()
+                };
+
+                $.ajax({
+                    url: '{!! url('') !!}/generator_builder/rollback',
+                    method: "POST",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+
+                        $("#rollbackInfo").html("");
+                        $("#rollbackInfo").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + result.message + '</strong></div>');
+                        $("#rollbackInfo").show();
+
+                        var $container = $("html,body");
+                        var $scrollTo = $('#rollbackInfo');
+                        $container.animate({
+                            scrollTop: $scrollTo.offset().top - $container.offset().top,
+                            scrollLeft: 0
+                        }, 300);
+                        setTimeout(function () {
+                            $('#rollbackInfo').fadeOut('fast');
+                        }, 3000);
+                        location.reload();
+                    },
+                    error: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+                        var errorMessage = '';
+                        if (result.hasOwnProperty('responseJSON') && result.responseJSON.hasOwnProperty('message')) {
+                            errorMessage = result.responseJSON.message;
+                        }
+
+                        $("#rollbackInfo").html("");
+                        $("#rollbackInfo").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail! </strong>' + errorMessage + '</div>');
+                        $("#rollbackInfo").show();
+                        setTimeout(function () {
+                            $('#rollbackInfo').fadeOut('fast');
+                        }, 3000);
+                    }
+                });
             });
 
             function renderPrimaryData(el) {
