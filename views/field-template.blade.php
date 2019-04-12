@@ -2,7 +2,30 @@
     <input type="text" style="width: 100%" required class="form-control txtFieldName"/>
 </td>
 <td style="vertical-align: middle">
-    <input type="text" class="form-control txtdbType" required/>
+    <select class="form-control txtdbType" style="width: 100%">
+        <option value="increments">Increments</option>
+        <option value="integer">Integer</option>
+        <option value="smallInteger">SmallInteger</option>
+        <option value="longText">LongText</option>
+        <option value="bigInteger">BigInteger</option>
+        <option value="double">Double</option>
+        <option value="float">Float</option>
+        <option value="decimal">Decimal</option>
+        <option value="boolean">Boolean</option>
+        <option value="string">String</option>
+        <option value="char">Char</option>
+        <option value="text">Text</option>
+        <option value="mediumText">MediumText</option>
+        <option value="longText">LongText</option>
+        <option value="enum">Enum</option>
+        <option value="binary">Binary</option>
+        <option value="dateTime">DateTime</option>
+        <option value="date">Date</option>
+        <option value="timestamp">Timestamp</option>
+    </select>
+
+    <input type="text" class="form-control dbValue txtDbValue" style="display: none"
+           placeholder=""/>
 </td>
 <td style="vertical-align: middle">
     <input type="text" class="form-control txtValidation"/>
@@ -19,6 +42,7 @@
         <option value="radio">Radio</option>
         <option value="checkbox">Checkbox</option>
         <option value="textarea">TextArea</option>
+        <option value="toggle-switch">Toggle</option>
     </select>
     <input type="text" class="form-control htmlValue txtHtmlValue" style="display: none"
            placeholder=""/>

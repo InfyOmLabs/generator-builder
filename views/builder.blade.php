@@ -382,6 +382,8 @@
                     options: {
                         softDelete: $('#chkDelete').prop('checked'),
                         save: $('#chkSave').prop('checked'),
+                    },
+                    addOns: {
                         swagger: $('#chkSwagger').prop('checked'),
                         tests: $('#chkTestCases').prop('checked'),
                         datatables: $('#chkDataTable').prop('checked')
@@ -411,8 +413,14 @@
                         location.reload();
                     },
                     error: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+                        var errorMessage = '';
+                        if (result.hasOwnProperty('responseJSON') && result.responseJSON.hasOwnProperty('message')) {
+                            errorMessage = result.responseJSON.message;
+                        }
+
                         $("#info").html("");
-                        $("#info").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail!</strong>result</div>');
+                        $("#info").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail! </strong>' + errorMessage + '</div>');
                         $("#info").show();
                         setTimeout(function () {
                             $('#info').fadeOut('fast');
@@ -541,6 +549,7 @@
                 $(el).find('.chkPrimary').attr('checked', true);
                 $(el).find('.chkInForm').attr('checked', false);
                 $(el).find('.chkInIndex').attr('checked', false);
+                $(el).find('.drdHtmlType').val('number').trigger('change');
             }
 
             function renderTimeStampData(el) {
