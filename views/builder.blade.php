@@ -499,7 +499,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '{!! url('') !!}/generator_builder/load-schema',
+                    url: '{!! url('') !!}/generator_builder/generate-from-file',
                     type: 'POST',
                     data: new FormData($(this)[0]),
                     processData: false,

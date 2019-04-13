@@ -57,7 +57,7 @@ class GeneratorBuilderController extends Controller
         return Response::json(['message' => 'Files rollback successfully'], 200);
     }
 
-    public function loadSchema()
+    public function generateFromFile()
     {
         $data = Request::all();
 
@@ -70,9 +70,9 @@ class GeneratorBuilderController extends Controller
         }
 
         Artisan::call($data['commandType'], [
-            'model'          => $data['modelName'],
-            '--fieldsFile'   => $filePath,
-            '--forceMigrate' => true,
+            'model'        => $data['modelName'],
+            '--fieldsFile' => $filePath,
+            '--skip'       => 'forceMigrate',
         ]);
 
         return Response::json(['message' => 'Files created successfully'], 200);

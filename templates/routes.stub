@@ -6,4 +6,7 @@ Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\
 
 Route::post('generator_builder/rollback', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@rollback');
 
-Route::post('generator_builder/load-schema', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@loadSchema');
+Route::post(
+    'generator_builder/generate-from-file',
+    '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
+);
