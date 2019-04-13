@@ -340,12 +340,12 @@
                     modelName: $('#txtModelName').val(),
                     commandType: $('#drdCommandType').val(),
                     tableName: $('#txtCustomTblName').val(),
-                    prefix: $('#txtPrefix').val(),
-                    paginate: $('#txtPaginate').val(),
                     migrate: $('#chkMigrate').prop('checked'),
                     options: {
                         softDelete: $('#chkDelete').prop('checked'),
                         save: $('#chkSave').prop('checked'),
+                        prefix: $('#txtPrefix').val(),
+                        paginate: $('#txtPaginate').val(),
                     },
                     addOns: {
                         swagger: $('#chkSwagger').prop('checked'),
