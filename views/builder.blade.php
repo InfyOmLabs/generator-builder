@@ -386,6 +386,9 @@
                         $("#info").html("");
                         $("#info").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail! </strong>' + errorMessage + '</div>');
                         $("#info").show();
+                        var $container = $("html,body");
+                        var $scrollTo = $('#info');
+                        $container.animate({ scrollTop: $scrollTo.offset().top}, 1000);
                         setTimeout(function () {
                             $('#info').fadeOut('fast');
                         }, 3000);
