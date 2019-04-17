@@ -388,7 +388,7 @@
                         $("#info").show();
                         var $container = $("html,body");
                         var $scrollTo = $('#info');
-                        $container.animate({ scrollTop: $scrollTo.offset().top}, 1000);
+                        $container.animate({ scrollTop: $scrollTo.offset().top}, 300);
                         setTimeout(function () {
                             $('#info').fadeOut('fast');
                         }, 3000);
