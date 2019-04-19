@@ -159,6 +159,30 @@
                         </div>
                     </div>
 
+                    <div class="table-responsive col-md-12" id="relationShip" style="margin-top:35px;display: none">
+                        <table class="table table-striped table-bordered" id="table">
+                            <thead class="no-border">
+                            <tr>
+                                <th>Relation Type</th>
+                                <th>Foreign Model<span class="required">*</span></th>
+                                <th>Foreign Key</th>
+                                <th>Local Key</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="rsContainer" class="no-border-x no-border-y ui-sortable">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-inline col-md-12" style="padding-top: 15px">
+                        <div class="form-group" style="border-color: transparent;">
+                            <button type="button" class="btn btn-success btn-flat btn-green" id="btnRelationShip"> Add
+                                RelationShip
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="form-inline col-md-12" style="padding:15px 15px;text-align: right">
                         <div class="form-group" style="border-color: transparent;padding-left: 10px">
                             <button type="submit" class="btn btn-flat btn-primary btn-blue" id="btnGenerate">Generate
@@ -303,6 +327,24 @@
                 $("#container").append(item);
             });
 
+            $("#btnRelationShip").on("click", function () {
+                $("#relationShip").show();
+                var item = $(relationComponent).clone();
+
+                $(item).find("select").select2({ width: '100%' });
+
+                var relationType = $(item).find('.drdRelationType');
+
+                $(relationType).select2().on('change', function () {
+                    if ($(relationType).val() == "mtm")
+                        $(item).find('.foreignTable').show();
+                    else
+                        $(item).find('.foreignTable').hide();
+                });
+
+                $("#rsContainer").append(item);
+            });
+
             $("#btnModelReset").on("click", function () {
                 $("#container").html("");
                 $('input:text').val("");
@@ -312,6 +354,7 @@
 
             $("#form").on("submit", function () {
                 var fieldArr = [];
+                var relationFieldArr = [];
                 $('.item').each(function () {
 
                     var htmlType = $(this).find('.drdHtmlType');
@@ -333,6 +376,16 @@
                         primary: $(this).find('.chkPrimary').prop('checked'),
                         inForm: $(this).find('.chkInForm').prop('checked'),
                         inIndex: $(this).find('.chkInIndex').prop('checked')
+                    });
+                });
+
+                $('.relationItem').each(function () {
+                    relationFieldArr.push({
+                        relationType: $(this).find('.drdRelationType').val(),
+                        foreignModel: $(this).find('.txtForeignModel').val(),
+                        foreignTable: $(this).find('.txtForeignTable').val(),
+                        foreignKey: $(this).find('.txtForeignKey').val(),
+                        localKey: $(this).find('.txtLocalKey').val(),
                     });
                 });
 
