@@ -85,13 +85,11 @@ class GeneratorBuilderController extends Controller
     private function prepareRelationshipData($inputData)
     {
         foreach ($inputData['relations'] as $inputRelation) {
-            // prepare relation
             $relationType = $inputRelation['relationType'];
             $relation = $relationType;
             if (isset($inputRelation['foreignModel'])) {
                 $relation .= ','.$inputRelation['foreignModel'];
             }
-
             if ($relationType == 'mtm') {
                 if (isset($inputRelation['foreignTable'])) {
                     $relation .= ','.$inputRelation['foreignTable'];
@@ -99,11 +97,9 @@ class GeneratorBuilderController extends Controller
                     $relation .= ',';
                 }
             }
-
             if (isset($inputRelation['foreignKey'])) {
                 $relation .= ','.$inputRelation['foreignKey'];
             }
-
             if (isset($inputRelation['localKey'])) {
                 $relation .= ','.$inputRelation['localKey'];
             }
@@ -113,7 +109,6 @@ class GeneratorBuilderController extends Controller
                 'relation' => $relation,
             ];
         }
-
         unset($inputData['relations']);
 
         return $inputData;
