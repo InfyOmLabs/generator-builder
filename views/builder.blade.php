@@ -407,7 +407,8 @@
                         tests: $('#chkTestCases').prop('checked'),
                         datatables: $('#chkDataTable').prop('checked')
                     },
-                    fields: fieldArr
+                    fields: fieldArr,
+                    relations: relationFieldArr
                 };
 
                 data['_token'] = $('#token').val();
