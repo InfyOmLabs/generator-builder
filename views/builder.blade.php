@@ -175,7 +175,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="form-inline col-md-12" style="padding-top: 15px">
+                    <div class="form-inline col-md-12" style="padding-top: 10px">
                         <div class="form-group" style="border-color: transparent;">
                             <button type="button" class="btn btn-success btn-flat btn-green" id="btnRelationShip"> Add
                                 RelationShip
@@ -298,6 +298,8 @@
         $(document).ready(function () {
             var htmlStr = '<tr class="item" style="display: table-row;"></tr>';
             var commonComponent = $(htmlStr).filter("tr").load('{!! url('') !!}/field_template');
+            var relationStr = '<tr class="relationItem" style="display: table-row;"></tr>';
+            var relationComponent = $(relationStr).filter("tr").load('{!! url('') !!}/relation_field_template');
 
             $("#btnAdd").on("click", function () {
                 var item = $(commonComponent).clone();
