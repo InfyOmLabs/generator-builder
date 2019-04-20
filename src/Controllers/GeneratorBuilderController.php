@@ -22,6 +22,11 @@ class GeneratorBuilderController extends Controller
         return view(config('infyom.generator_builder.views.field-template'));
     }
 
+    public function relationFieldTemplate()
+    {
+        return view(config('infyom.generator_builder.views.relation-field-template'));
+    }
+
     public function generate(BuilderGenerateRequest $request)
     {
         $data = $request->all();
@@ -31,9 +36,14 @@ class GeneratorBuilderController extends Controller
             $this->validateFields($data['fields']);
         }
 
+        // prepare relationship
+        if (isset($data['fields']) && !empty($data['relations'])) {
+            $data = $this->prepareRelationshipData($data);
+        }
+
         $res = Artisan::call($data['commandType'], [
-            'model' => $data['modelName'],
-            '--jsonFromGUI' => json_encode($data)
+            'model'         => $data['modelName'],
+            '--jsonFromGUI' => json_encode($data),
         ]);
 
         return Response::json("Files created successfully");
@@ -70,6 +80,38 @@ class GeneratorBuilderController extends Controller
         }
 
         return true;
+    }
+
+    private function prepareRelationshipData($inputData)
+    {
+        foreach ($inputData['relations'] as $inputRelation) {
+            $relationType = $inputRelation['relationType'];
+            $relation = $relationType;
+            if (isset($inputRelation['foreignModel'])) {
+                $relation .= ','.$inputRelation['foreignModel'];
+            }
+            if ($relationType == 'mtm') {
+                if (isset($inputRelation['foreignTable'])) {
+                    $relation .= ','.$inputRelation['foreignTable'];
+                } else {
+                    $relation .= ',';
+                }
+            }
+            if (isset($inputRelation['foreignKey'])) {
+                $relation .= ','.$inputRelation['foreignKey'];
+            }
+            if (isset($inputRelation['localKey'])) {
+                $relation .= ','.$inputRelation['localKey'];
+            }
+
+            $inputData['fields'][] = [
+                'type'     => 'relation',
+                'relation' => $relation,
+            ];
+        }
+        unset($inputData['relations']);
+
+        return $inputData;
     }
 
 //    public function availableSchema()
