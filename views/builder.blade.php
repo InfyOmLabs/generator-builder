@@ -373,6 +373,8 @@
                         dbType: $(this).find('.txtdbType').val(),
                         htmlType: htmlValue,
                         validations: $(this).find('.txtValidation').val(),
+                        foreignTable: $(this).find('.txtForeignTable').val(),
+                        isForeign: $(this).find('.chkForeign').prop('checked'),
                         searchable: $(this).find('.chkSearchable').prop('checked'),
                         fillable: $(this).find('.chkFillable').prop('checked'),
                         primary: $(this).find('.chkPrimary').prop('checked'),
@@ -539,6 +541,14 @@
                 $('.chkPrimary').each(function () {
                     $(this).iCheck('uncheck');
                 });
+            });
+
+            $(el).find(".chkForeign").on("ifChanged", function () {
+                if ($(this).prop('checked') == true) {
+                    $(el).find('.foreignTable').show();
+                } else {
+                    $(el).find('.foreignTable').hide();
+                }
             });
 
             $(el).find(".chkPrimary").on("ifChanged", function () {

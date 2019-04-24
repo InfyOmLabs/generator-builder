@@ -1,5 +1,7 @@
 <td style="vertical-align: middle">
     <input type="text" style="width: 100%" required class="form-control txtFieldName"/>
+    <input type="text" class="form-control foreignTable txtForeignTable" style="display: none"
+           placeholder="ForeignTable,primaryKey"/>
 </td>
 <td style="vertical-align: middle">
     <select class="form-control txtdbType" style="width: 100%">
