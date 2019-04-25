@@ -129,6 +129,7 @@
                                 <th>Validations</th>
                                 <th>Html Type</th>
                                 <th style="width: 68px">Primary</th>
+                                <th style="width: 80px">Is Foreign</th>
                                 <th style="width: 87px">Searchable</th>
                                 <th style="width: 63px">Fillable</th>
                                 <th style="width: 65px">In Form</th>
