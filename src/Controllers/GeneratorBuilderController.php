@@ -34,8 +34,14 @@ class GeneratorBuilderController extends Controller
         // Validate fields
         if (isset($data['fields'])) {
             $this->validateFields($data['fields']);
+
             // prepare foreign key
-            $data['fields'] = $this->prepareForeignKeyData($data['fields']);
+            $isAnyForeignKey =  collect($data['fields'])->filter(function ($field) {
+                return $field['isForeign'] == true;
+            });
+            if (count($isAnyForeignKey)) {
+                $data['fields'] = $this->prepareForeignKeyData($data['fields']);
+            }
         }
 
         // prepare relationship
