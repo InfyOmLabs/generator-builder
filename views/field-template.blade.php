@@ -59,6 +59,13 @@
 <td style="vertical-align: middle">
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkForeign"/>
+        </label>
+    </div>
+</td>
+<td style="vertical-align: middle">
+    <div class="checkbox" style="text-align: center">
+        <label style="padding-left: 0px">
             <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkSearchable" checked/>
         </label>
     </div>
