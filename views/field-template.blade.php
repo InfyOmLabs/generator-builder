@@ -1,5 +1,7 @@
 <td style="vertical-align: middle">
     <input type="text" style="width: 100%" required class="form-control txtFieldName"/>
+    <input type="text" class="form-control foreignTable txtForeignTable" style="display: none"
+           placeholder="Foreign table,Primary key"/>
 </td>
 <td style="vertical-align: middle">
     <select class="form-control txtdbType" style="width: 100%">
@@ -51,6 +53,13 @@
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
             <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkPrimary"/>
+        </label>
+    </div>
+</td>
+<td style="vertical-align: middle">
+    <div class="checkbox" style="text-align: center">
+        <label style="padding-left: 0px">
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkForeign"/>
         </label>
     </div>
 </td>

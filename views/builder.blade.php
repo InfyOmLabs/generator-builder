@@ -129,6 +129,7 @@
                                 <th>Validations</th>
                                 <th>Html Type</th>
                                 <th style="width: 68px">Primary</th>
+                                <th style="width: 80px">Is Foreign</th>
                                 <th style="width: 87px">Searchable</th>
                                 <th style="width: 63px">Fillable</th>
                                 <th style="width: 65px">In Form</th>
@@ -373,6 +374,8 @@
                         dbType: $(this).find('.txtdbType').val(),
                         htmlType: htmlValue,
                         validations: $(this).find('.txtValidation').val(),
+                        foreignTable: $(this).find('.txtForeignTable').val(),
+                        isForeign: $(this).find('.chkForeign').prop('checked'),
                         searchable: $(this).find('.chkSearchable').prop('checked'),
                         fillable: $(this).find('.chkFillable').prop('checked'),
                         primary: $(this).find('.chkPrimary').prop('checked'),
@@ -539,6 +542,14 @@
                 $('.chkPrimary').each(function () {
                     $(this).iCheck('uncheck');
                 });
+            });
+
+            $(el).find(".chkForeign").on("ifChanged", function () {
+                if ($(this).prop('checked') == true) {
+                    $(el).find('.foreignTable').show();
+                } else {
+                    $(el).find('.foreignTable').hide();
+                }
             });
 
             $(el).find(".chkPrimary").on("ifChanged", function () {

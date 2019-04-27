@@ -34,6 +34,14 @@ class GeneratorBuilderController extends Controller
         // Validate fields
         if (isset($data['fields'])) {
             $this->validateFields($data['fields']);
+
+            // prepare foreign key
+            $isAnyForeignKey =  collect($data['fields'])->filter(function ($field) {
+                return $field['isForeign'] == true;
+            });
+            if (count($isAnyForeignKey)) {
+                $data['fields'] = $this->prepareForeignKeyData($data['fields']);
+            }
         }
 
         // prepare relationship
@@ -112,6 +120,33 @@ class GeneratorBuilderController extends Controller
         unset($inputData['relations']);
 
         return $inputData;
+    }
+
+    private function prepareForeignKeyData($fields)
+    {
+        $updatedFields = [];
+        foreach ($fields as $field) {
+            if ($field['isForeign'] == true) {
+                if (empty($field['foreignTable'])) {
+                    throw new Exception('Foreign table required');
+                }
+                $inputs = explode(',', $field['foreignTable']);
+                $foreignTableName = array_shift($inputs);
+                // prepare dbType
+                $dbType = $field['dbType'];
+                $dbType .= ':unsigned:foreign';
+                $dbType .= ','.$foreignTableName;
+                if (!empty($inputs)) {
+                    $dbType .= ','.$inputs['0'];
+                } else {
+                    $dbType .= ',id';
+                }
+                $field['dbType'] = $dbType;
+            }
+            $updatedFields[] = $field;
+        }
+
+        return $updatedFields;
     }
 
 //    public function availableSchema()
