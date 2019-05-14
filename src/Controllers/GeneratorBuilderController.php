@@ -5,11 +5,11 @@ namespace InfyOm\GeneratorBuilder\Controllers;
 use App\Http\Controllers\Controller;
 use Artisan;
 use File;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use InfyOm\GeneratorBuilder\Requests\BuilderGenerateRequest;
-use Illuminate\Http\UploadedFile;
-use Response;
 use Request;
+use Response;
 
 class GeneratorBuilderController extends Controller
 {
@@ -72,7 +72,7 @@ class GeneratorBuilderController extends Controller
         Artisan::call($data['commandType'], [
             'model'        => $data['modelName'],
             '--fieldsFile' => $filePath,
-            '--skip'       => 'forceMigrate',
+            '--skip'       => 'migration',
         ]);
 
         return Response::json(['message' => 'Files created successfully'], 200);
