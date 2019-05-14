@@ -72,7 +72,6 @@ class GeneratorBuilderController extends Controller
         Artisan::call($data['commandType'], [
             'model'        => $data['modelName'],
             '--fieldsFile' => $filePath,
-            '--skip'       => 'migration',
         ]);
 
         return Response::json(['message' => 'Files created successfully'], 200);
