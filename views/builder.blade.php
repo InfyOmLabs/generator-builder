@@ -268,7 +268,43 @@
         </div>
     </section>
 </div>
-
+<div class="col-md-10 col-md-offset-1">
+    <section class="content">
+        <div id="schemaInfo" style="display: none"></div>
+        <div class="box box-primary col-lg-12">
+            <div class="box-header" style="margin-top: 10px">
+                <h1 class="box-title" style="font-size: 30px">Generate CRUD From Schema</h1>
+            </div>
+            <div class="box-body">
+                <form method="post" id="schemaForm" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" id="smToken" value="{!! csrf_token() !!}"/>
+                    <div class="form-group col-md-4">
+                        <label for="txtSmModelName">Model Name<span class="required">*</span></label>
+                        <input type="text" name="modelName" class="form-control" id="txtSmModelName" placeholder="Enter Model Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="schemaFile">Schema File<span class="required">*</span></label>
+                        <input type="file" name="schemaFile" class="form-control" required id="schemaFile">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="drdSmCommandType">Command Type</label>
+                        <select name="commandType" id="drdSmCommandType" class="form-control" style="width: 100%">
+                            <option value="infyom:api_scaffold">API Scaffold Generator</option>
+                            <option value="infyom:api">API Generator</option>
+                            <option value="infyom:scaffold">Scaffold Generator</option>
+                        </select>
+                    </div>
+                    <div class="form-inline col-md-12" style="padding:15px 15px;text-align: right">
+                        <div class="form-group" style="border-color: transparent;padding-left: 10px">
+                            <button type="submit" class="btn btn-flat btn-primary btn-blue" id="btnSmGenerate">Generate
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -500,6 +536,62 @@
                         $("#rollbackInfo").show();
                         setTimeout(function () {
                             $('#rollbackInfo').fadeOut('fast');
+                        }, 3000);
+                    }
+                });
+            });
+
+            $('#schemaFile').change(function () {
+                var ext = $(this).val().split('.').pop().toLowerCase();
+                if (ext != 'json') {
+                    $("#schemaInfo").html("");
+                    $("#schemaInfo").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Schema file must be json</strong></div>');
+                    $("#schemaInfo").show();
+                    $(this).replaceWith($(this).val('').clone(true));
+                    setTimeout(function () {
+                        $('div.alert').fadeOut('fast');
+                    }, 3000);
+                }
+            });
+
+            $('#schemaForm').on("submit", function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '{!! url('') !!}/generator_builder/generate-from-file',
+                    type: 'POST',
+                    data: new FormData($(this)[0]),
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+
+                        $("#schemaInfo").html("");
+                        $("#schemaInfo").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + result.message + '</strong></div>');
+                        $("#schemaInfo").show();
+                        var $container = $("html,body");
+                        var $scrollTo = $('#schemaInfo');
+                        $container.animate({
+                            scrollTop: $scrollTo.offset().top - $container.offset().top,
+                            scrollLeft: 0
+                        }, 300);
+                        setTimeout(function () {
+                            $('#schemaInfo').fadeOut('fast');
+                        }, 3000);
+                        location.reload();
+                    },
+                    error: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+                        var errorMessage = '';
+                        if (result.hasOwnProperty('responseJSON') && result.responseJSON.hasOwnProperty('message')) {
+                            errorMessage = result.responseJSON.message;
+                        }
+
+                        $("#schemaInfo").html("");
+                        $("#schemaInfo").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail! </strong>' + errorMessage + '</div>');
+                        $("#schemaInfo").show();
+                        setTimeout(function () {
+                            $('#schemaInfo').fadeOut('fast');
                         }, 3000);
                     }
                 });
