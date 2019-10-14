@@ -1,5 +1,6 @@
 {
     "name": "infyomlabs/generator-builder",
+    "type": "library",
     "description": "InfyOm Laravel Generator GUI Builder",
     "keywords": [
         "laravel",
