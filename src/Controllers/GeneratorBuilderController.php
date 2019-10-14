@@ -94,6 +94,25 @@ class GeneratorBuilderController extends Controller
 
         return Response::json(['message' => 'Files created successfully'], 200);
     }
+    
+    public function generateFromFile()
+    {
+        $data = Request::all();
+
+        $file = $data['schemaFile'];
+        $filePath = $file->getRealPath();
+        $extension = $file->getClientOriginalExtension(); // getting file extension
+        if ($extension != 'json') {
+            throw new \Exception('Schema file must be Json');
+        }
+
+        Artisan::call($data['commandType'], [
+            'model'        => $data['modelName'],
+            '--fieldsFile' => $filePath,
+        ]);
+
+        return Response::json(['message' => 'Files created successfully'], 200);
+    }
 
     private function validateFields($fields)
     {
