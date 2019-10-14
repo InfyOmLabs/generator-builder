@@ -12,3 +12,7 @@ Route::post(
     'generator_builder/generate-from-file',
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 );
+Route::post(
+       'generator_builder/generate-from-database',
+       '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromDatabase'
+);
