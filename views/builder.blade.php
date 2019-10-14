@@ -305,6 +305,60 @@
         </div>
     </section>
 </div>
+
+<div class="col-md-10 col-md-offset-1">
+                <section class="content">
+                    <div id="databaseInfo" style="display: none"></div>
+                    <div class="box box-primary col-lg-12">
+                        <div class="box-header" style="margin-top: 10px">
+                            <h1 class="box-title" style="font-size: 30px">Generate CRUD From Database</h1>
+                        </div>
+                        <div class="box-body">
+                            <form method="post" id="databaseForm" enctype="multipart/form-data">
+                                <input type="hidden" name="_token" id="smToken" value="{!! csrf_token() !!}"/>
+                                <div class="form-group col-md-4">
+                                    <label for="txtSmModelName">Prefix</label>
+                                    <input type="text" name="prefix" class="form-control" id="txtSmModelName" placeholder="prefix">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="databaseFile">Skip Fields</label>
+                                    <input type="text" name="skipfields" class="form-control" id="databaseFile">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="drdSmCommandType">Tables</label>
+                                    <select name="tables[]" id="drdSmCommandType" multiple class="form-control" style="width: 100%">
+                                        <?php 
+                                        //This work for laravel out of box
+                                        //if you are not using laravel adjust to meet your envinronment
+                                        $tables = \DB::select('SHOW TABLES');
+                                            foreach($tables as $table)
+                                            {
+                                                $table = $table->{"Tables_in_".env("DB_DATABASE","forge")};
+                                                
+                                                  echo "<option value='$table'>$table</option>";
+                                            }?>
+                                       
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="drdSmCommandType">Command Type</label>
+                                    <select name="commandType" id="drdSmCommandType" class="form-control" style="width: 100%">
+                                        <option value="infyom:api_scaffold">API Scaffold Generator</option>
+                                        <option value="infyom:api">API Generator</option>
+                                        <option value="infyom:scaffold">Scaffold Generator</option>
+                                    </select>
+                                </div>
+                                <div class="form-inline col-md-12" style="padding:15px 15px;text-align: right">
+                                    <div class="form-group" style="border-color: transparent;padding-left: 10px">
+                                        <button type="submit" class="btn btn-flat btn-primary btn-blue" id="btnSmGenerate">Generate
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -595,6 +649,49 @@
                         $("#schemaInfo").show();
                         setTimeout(function () {
                             $('#schemaInfo').fadeOut('fast');
+                        }, 3000);
+                    }
+                });
+            });
+            
+            $('#databaseForm').on("submit", function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '{!! url('') !!}/generator_builder/generate-from-database',
+                    type: 'POST',
+                    data: new FormData($(this)[0]),
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+
+                        $("#databaseInfo").html("");
+                        $("#databaseInfo").append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + result.message + '</strong></div>');
+                        $("#databaseInfo").show();
+                        var $container = $("html,body");
+                        var $scrollTo = $('#databaseInfo');
+                        $container.animate({
+                            scrollTop: $scrollTo.offset().top - $container.offset().top,
+                            scrollLeft: 0
+                        }, 300);
+                        setTimeout(function () {
+                            $('#databaseInfo').fadeOut('fast');
+                        }, 3000);
+                        location.reload();
+                    },
+                    error: function (result) {
+                        var result = JSON.parse(JSON.stringify(result));
+                        var errorMessage = '';
+                        if (result.hasOwnProperty('responseJSON') && result.responseJSON.hasOwnProperty('message')) {
+                            errorMessage = result.responseJSON.message;
+                        }
+
+                        $("#databaseInfo").html("");
+                        $("#databaseInfo").append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fail! </strong>' + errorMessage + '</div>');
+                        $("#databaseInfo").show();
+                        setTimeout(function () {
+                            $('#databaseInfo').fadeOut('fast');
                         }, 3000);
                     }
                 });
