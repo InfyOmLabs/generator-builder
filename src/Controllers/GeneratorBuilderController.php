@@ -94,6 +94,35 @@ class GeneratorBuilderController extends Controller
 
         return Response::json(['message' => 'Files created successfully'], 200);
     }
+    /* Crud generator for generating from DB
+    */
+    public function generateFromDatabase()
+    {
+        $data = Request::all();
+
+        $prefix = $data['prefix'];
+        $tables = $data['tables'];
+        
+        $skipfields = $data['skipfields'];
+        $input  = [
+            '--fromTable' => ' ',
+            ];
+        if(!empty($prefix))
+            $input['--prefix'] = $prefix;
+        if(!empty($skipfields))
+            $input['--ignoreFields'] = $skipfields;
+
+        foreach ($tables as $key=>$table) {
+            # code...
+            $input['model']        = $table;
+            $input['--tableName'] = $table;
+            
+            Artisan::call($data['commandType'], $input);
+            //var_dump(Artisan::output());
+        }
+     
+        return Response::json(['message' => 'Files created successfully'], 200);
+    }
 
     private function validateFields($fields)
     {
