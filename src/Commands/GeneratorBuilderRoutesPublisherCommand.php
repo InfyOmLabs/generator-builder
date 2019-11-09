@@ -44,8 +44,6 @@ class GeneratorBuilderRoutesPublisherCommand extends Command
 
         $builderRoutes = file_get_contents(__DIR__ . "/../../templates/routes.stub");
 
-        $path = config('infyom.laravel_generator.path.routes', app_path('Http/routes.php'));
-
         file_put_contents($path, $routeContents . "\n\n" . $builderRoutes);
 
         $this->comment("\nBuilder routes added to routes.php");
