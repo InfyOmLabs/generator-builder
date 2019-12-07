@@ -94,8 +94,10 @@ class GeneratorBuilderController extends Controller
 
         return Response::json(['message' => 'Files created successfully'], 200);
     }
-    /* Crud generator for generating from DB
-    */
+
+    /** 
+     *  Crud generator for generating from DB
+     */
     public function generateFromDatabase()
     {
         $data = Request::all();
@@ -104,21 +106,22 @@ class GeneratorBuilderController extends Controller
         $tables = $data['tables'];
         
         $skipfields = $data['skipfields'];
-        $input  = [
+        $input = [
             '--fromTable' => ' ',
-            ];
-        if(!empty($prefix))
+        ];
+        if (!empty($prefix)) {
             $input['--prefix'] = $prefix;
-        if(!empty($skipfields))
+        }
+        if (!empty($skipfields)) {
             $input['--ignoreFields'] = $skipfields;
+        }
 
         foreach ($tables as $key=>$table) {
-            # code...
-            $input['model']        = $table;
+            $modelName = str_replace(' ', '', Str::title(str_replace('_', ' ', Str::singular($table))));
+            $input['model'] = $modelName;
             $input['--tableName'] = $table;
             
             Artisan::call($data['commandType'], $input);
-            //var_dump(Artisan::output());
         }
      
         return Response::json(['message' => 'Files created successfully'], 200);
