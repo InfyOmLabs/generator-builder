@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use InfyOm\GeneratorBuilder\Requests\BuilderGenerateRequest;
 use Request;
 use Response;
+use Illuminate\Support\Str;
 
 class GeneratorBuilderController extends Controller
 {
@@ -116,7 +117,7 @@ class GeneratorBuilderController extends Controller
             $input['--ignoreFields'] = $skipfields;
         }
 
-        foreach ($tables as $key=>$table) {
+        foreach ($tables as $key => $table) {
             $modelName = str_replace(' ', '', Str::title(str_replace('_', ' ', Str::singular($table))));
             $input['model'] = $modelName;
             $input['--tableName'] = $table;
