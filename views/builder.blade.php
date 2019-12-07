@@ -95,10 +95,16 @@
                                             class="chk-label-margin">Datatables</span>
                                 </label>
                             </div>
-                            <div class="checkbox chk-align" id="chMigrate">
+                            <div class="checkbox chk-align" id="chMigration">
                                 <label>
-                                    <input type="checkbox" class="flat-red" id="chkMigrate"> <span
-                                            class="chk-label-margin">Migrate</span>
+                                    <input type="checkbox" class="flat-red" id="chkMigration"> <span
+                                            class="chk-label-margin">Migration</span>
+                                </label>
+                            </div>
+                            <div class="checkbox chk-align" id="chForceMigrate">
+                                <label>
+                                    <input type="checkbox" class="flat-red" id="chkForceMigrate"> <span
+                                            class="chk-label-margin">Force Migrate</span>
                                 </label>
                             </div>
                         </div>
@@ -332,11 +338,20 @@
             }
         });
 
+        $("#chkForceMigrate").on("ifChanged", function () {
+            if ($(this).prop('checked') == true) {
+                $('#chkMigration').iCheck("check", true);
+                $('#chkMigration').iCheck("disable", true);
+            } else {
+                $('#chkMigration').iCheck("enable", true);
+            }
+        });
+
         $(document).ready(function () {
             var htmlStr = '<tr class="item" style="display: table-row;"></tr>';
-            var commonComponent = $(htmlStr).filter("tr").load('{!! url('') !!}/field_template');
+            var commonComponent = $(htmlStr).filter("tr").load('{{ route('io_field_template') }}');
             var relationStr = '<tr class="relationItem" style="display: table-row;"></tr>';
-            var relationComponent = $(relationStr).filter("tr").load('{!! url('') !!}/relation_field_template');
+            var relationComponent = $(relationStr).filter("tr").load('{{ route('io_relation_field_template') }}');
 
             $("#btnAdd").on("click", function () {
                 var item = $(commonComponent).clone();
@@ -434,12 +449,13 @@
                     modelName: $('#txtModelName').val(),
                     commandType: $('#drdCommandType').val(),
                     tableName: $('#txtCustomTblName').val(),
-                    migrate: $('#chkMigrate').prop('checked'),
+                    migrate: $('#chkMigration').prop('checked'),
                     options: {
                         softDelete: $('#chkDelete').prop('checked'),
                         save: $('#chkSave').prop('checked'),
                         prefix: $('#txtPrefix').val(),
                         paginate: $('#txtPaginate').val(),
+                        forceMigrate: $('#chkForceMigrate').prop('checked'),
                     },
                     addOns: {
                         swagger: $('#chkSwagger').prop('checked'),
@@ -453,7 +469,7 @@
                 data['_token'] = $('#token').val();
 
                 $.ajax({
-                    url: '{!! url('') !!}/generator_builder/generate',
+                    url: '{{ route('io_generator_builder_generate') }}',
                    // type: "POST",
                     method: "POST",
                     dataType: 'json',
@@ -504,7 +520,7 @@
                 };
 
                 $.ajax({
-                    url: '{!! url('') !!}/generator_builder/rollback',
+                    url: '{{ route('io_generator_builder_rollback') }}',
                     method: "POST",
                     dataType: 'json',
                     contentType: 'application/json',
@@ -561,7 +577,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '{!! url('') !!}/generator_builder/generate-from-file',
+                    url: '{{ route('io_generator_builder_generate_from_file') }}',
                     type: 'POST',
                     data: new FormData($(this)[0]),
                     processData: false,
