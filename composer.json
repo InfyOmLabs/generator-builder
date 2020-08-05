@@ -27,5 +27,12 @@
         "psr-4": {
             "InfyOm\\GeneratorBuilder\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\InfyOm\\GeneratorBuilder\\GeneratorBuilderServiceProvider"
+            ]
+        }
     }
 }
