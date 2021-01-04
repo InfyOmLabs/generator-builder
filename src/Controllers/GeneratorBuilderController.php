@@ -149,7 +149,7 @@ class GeneratorBuilderController extends Controller
         foreach ($fields as $field) {
             if ($field['isForeign'] == true) {
                 if (empty($field['foreignTable'])) {
-                    throw new Exception('Foreign table required');
+                    throw new \Exception('Foreign table required');
                 }
                 $inputs = explode(',', $field['foreignTable']);
                 $foreignTableName = array_shift($inputs);
