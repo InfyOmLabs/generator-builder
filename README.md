@@ -15,7 +15,7 @@ You can support us by either sponsoring us or buying one of our paid products. O
 
 ### Buy our Paid Products
 
-[![InfyJobs](https://assets.infyom.com/open-source/new/infyjobs-banner.png)](https://1.envato.market/P0ONVj)
+[![InfyVCards-SaaS](https://assets.infyom.com/open-source/new/infyvcards-saas-banner.png)](https://1.envato.market/15gvva)
 
 You can also check out our other paid products on [CodeCanyon](https://1.envato.market/BXAnR1).
 
