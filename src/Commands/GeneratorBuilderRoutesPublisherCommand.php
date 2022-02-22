@@ -42,9 +42,9 @@ class GeneratorBuilderRoutesPublisherCommand extends Command
 
         $routeContents = file_get_contents($path);
 
-        $builderRoutes = file_get_contents(__DIR__ . "/../../templates/routes.stub");
+        $builderRoutes = file_get_contents(__DIR__.'/../../templates/routes.stub');
 
-        file_put_contents($path, $routeContents . "\n\n" . $builderRoutes);
+        file_put_contents($path, $routeContents."\n\n".$builderRoutes);
 
         $this->comment("\nBuilder routes added to routes.php");
     }
@@ -54,7 +54,7 @@ class GeneratorBuilderRoutesPublisherCommand extends Command
      */
     public function publishViews()
     {
-        $sourceDir = __DIR__ . "/../../views/";
+        $sourceDir = __DIR__.'/../../views/';
         $destinationDir = base_path('resources/views/infyom/generator-builder/');
 
         if (file_exists($destinationDir)) {
@@ -76,8 +76,7 @@ class GeneratorBuilderRoutesPublisherCommand extends Command
     public function getOptions()
     {
         return [
-            ['views', null, InputOption::VALUE_NONE, 'Publishes views as well']
+            ['views', null, InputOption::VALUE_NONE, 'Publishes views as well'],
         ];
     }
-
 }

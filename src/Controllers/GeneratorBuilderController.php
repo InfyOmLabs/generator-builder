@@ -17,7 +17,7 @@ class GeneratorBuilderController extends Controller
     {
         return view(config('infyom.generator_builder.views.builder'));
     }
-    
+
     public function fieldTemplate()
     {
         return view(config('infyom.generator_builder.views.field-template'));
@@ -37,7 +37,7 @@ class GeneratorBuilderController extends Controller
             $this->validateFields($data['fields']);
 
             // prepare foreign key
-            $isAnyForeignKey =  collect($data['fields'])->filter(function ($field) {
+            $isAnyForeignKey = collect($data['fields'])->filter(function ($field) {
                 return $field['isForeign'] == true;
             });
             if (count($isAnyForeignKey)) {
@@ -55,7 +55,7 @@ class GeneratorBuilderController extends Controller
             '--jsonFromGUI' => json_encode($data),
         ]);
 
-        return Response::json("Files created successfully");
+        return Response::json('Files created successfully');
     }
 
     public function rollback()
