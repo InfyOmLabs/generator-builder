@@ -7,19 +7,19 @@ use InfyOm\GeneratorBuilder\Commands\GeneratorBuilderRoutesPublisherCommand;
 
 class GeneratorBuilderServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap the application events.
      *
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
         $configPath = __DIR__.'/../config/generator_builder.php';
 
         $this->publishes([
             $configPath => config_path('infyom/generator_builder.php'),
         ]);
-        
+
         $this->loadViewsFrom(__DIR__.'/../views/', 'generator-builder');
     }
 
@@ -35,7 +35,7 @@ class GeneratorBuilderServiceProvider extends ServiceProvider
         });
 
         $this->commands([
-            'infyom.publish.generator-builder'
+            'infyom.publish.generator-builder',
         ]);
     }
 }

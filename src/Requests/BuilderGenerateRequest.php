@@ -25,9 +25,9 @@ class BuilderGenerateRequest extends FormRequest
     public function rules()
     {
         return [
-            'modelName' => 'required',
-            'fields' => 'required',
-            'commandType' => 'required'
+            'modelName'   => 'required',
+            'fields'      => 'required',
+            'commandType' => 'required',
         ];
     }
 
