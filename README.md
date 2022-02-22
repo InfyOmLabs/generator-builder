@@ -3,15 +3,21 @@
 InfyOm Laravel Generator GUI Builder
 =====================================
 
-Documentation is located [here](http://labs.infyom.com/laravelgenerator)
+## Documentation
 
-Installation steps are located [here](http://labs.infyom.com/laravelgenerator/docs/5.8/gui-interface)
+Read [Documentation](https://infyom.com/open-source/gui-interface/docs) for detailed installation steps and usage.
 
 ## Support Us
 
 We have created [14+ Laravel packages](https://github.com/InfyOmLabs) and invested a lot of resources into creating these all packages and maintaining them.
 
 You can support us by either sponsoring us or buying one of our paid products. Or help us by spreading the word about us on social platforms via tweets and posts.
+
+### Buy our Paid Products
+
+[![InfyJobs](https://assets.infyom.com/open-source/new/infyjobs-banner.png)](https://1.envato.market/P0ONVj)
+
+You can also check out our other paid products on [CodeCanyon](https://1.envato.market/BXAnR1).
 
 ### Sponsors
 
@@ -25,12 +31,6 @@ You can support us by either sponsoring us or buying one of our paid products. O
 
 <a href="https://opencollective.com/infyomlabs#backer"><img src="https://opencollective.com/infyomlabs/backers.svg?width=890"></a>
 
-### Buy our Paid Products
-
-[![InfyChat](https://assets.infyom.com/open-source/new/infyjobs-banner.png)](https://1.envato.market/P0ONVj)
-
-You can also check out our other paid products on [CodeCanyon](https://codecanyon.net/user/infyomlabs/portfolio).
-
 ### Follow Us
 
 - [Twitter](https://twitter.com/infyom)
@@ -38,3 +38,20 @@ You can also check out our other paid products on [CodeCanyon](https://codecanyo
 - [LinkedIn](https://in.linkedin.com/company/infyom-technologies)
 - [Youtube](https://www.youtube.com/channel/UC8IvwfChD6i7Wp4yZp3tNsQ)
 - [Contact Us](https://infyom.com/contact-us)
+
+## Made with InfyOm Generator
+
+Also, Do not forget to add your website to [Made with InfyOm Generator List](https://github.com/InfyOmLabs/laravel-generator/blob/develop/made-with-generator.md) list.
+
+## Security
+
+If you discover any security-related issues, create an issue using the issue tracker.
+
+## Credits
+
+- [InfyOm Technologies](https://github.com/infyomlabs)
+- [All Contributors](../../contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
