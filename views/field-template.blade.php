@@ -1,7 +1,14 @@
+<td class="drag-handler">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-grip-vertical"
+        viewBox="0 0 16 16">
+        <path
+            d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+    </svg>
+</td>
 <td style="vertical-align: middle">
-    <input type="text" style="width: 100%" required class="form-control txtFieldName"/>
+    <input type="text" style="width: 100%" required class="form-control txtFieldName" />
     <input type="text" class="form-control foreignTable txtForeignTable" style="display: none"
-           placeholder="Foreign table,Primary key"/>
+        placeholder="Foreign table,Primary key" />
 </td>
 <td style="vertical-align: middle">
     <select class="form-control txtdbType" style="width: 100%">
@@ -26,11 +33,10 @@
         <option value="timestamp">Timestamp</option>
     </select>
 
-    <input type="text" class="form-control dbValue txtDbValue" style="display: none"
-           placeholder=""/>
+    <input type="text" class="form-control dbValue txtDbValue" style="display: none" placeholder="" />
 </td>
 <td style="vertical-align: middle">
-    <input type="text" class="form-control txtValidation"/>
+    <input type="text" class="form-control txtValidation" />
 </td>
 <td style="vertical-align: middle">
     <select class="form-control drdHtmlType" style="width: 100%">
@@ -46,52 +52,50 @@
         <option value="textarea">TextArea</option>
         <option value="toggle-switch">Toggle</option>
     </select>
-    <input type="text" class="form-control htmlValue txtHtmlValue" style="display: none"
-           placeholder=""/>
+    <input type="text" class="form-control htmlValue txtHtmlValue" style="display: none" placeholder="" />
 </td>
 <td style="vertical-align: middle">
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
-            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkPrimary"/>
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkPrimary" />
         </label>
     </div>
 </td>
 <td style="vertical-align: middle">
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
-            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkForeign"/>
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkForeign" />
         </label>
     </div>
 </td>
 <td style="vertical-align: middle">
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
-            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkSearchable" checked/>
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkSearchable" checked />
         </label>
     </div>
 </td>
 <td style="vertical-align: middle">
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
-            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkFillable" checked/>
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkFillable" checked />
         </label>
     </div>
 </td>
 <td style="vertical-align: middle">
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
-            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkInForm" checked/>
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkInForm" checked />
         </label>
     </div>
 </td>
 <td style="vertical-align: middle">
     <div class="checkbox" style="text-align: center">
         <label style="padding-left: 0px">
-            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkInIndex" checked/>
+            <input type="checkbox" style="margin-left: 0px!important;" class="flat-red chkInIndex" checked />
         </label>
     </div>
 </td>
 <td style="text-align: center;vertical-align: middle">
-    <i onclick="removeItem(this)" class="remove fa fa-trash-o"
-       style="cursor: pointer;font-size: 20px;color: red"></i>
+    <i onclick="removeItem(this)" class="remove fa fa-trash-o" style="cursor: pointer;font-size: 20px;color: red"></i>
 </td>
