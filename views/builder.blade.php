@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    factures
+    generateur builder
 @endsection
 @section('css')
     {{-- <link href="{{ URL::asset('assets/css/app.css') }}" rel="stylesheet" type="text/css" /> --}}
