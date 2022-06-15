@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use InfyOm\GeneratorBuilder\Requests\BuilderGenerateRequest;
 use Request;
 use Response;
+use Illuminate\Support\Str;
 
 class GeneratorBuilderController extends Controller
 {
@@ -92,6 +93,38 @@ class GeneratorBuilderController extends Controller
             '--fieldsFile' => $filePath,
         ]);
 
+        return Response::json(['message' => 'Files created successfully'], 200);
+    }
+
+    /** 
+     *  Crud generator for generating from DB
+     */
+    public function generateFromDatabase()
+    {
+        $data = Request::all();
+
+        $prefix = $data['prefix'];
+        $tables = $data['tables'];
+        
+        $skipfields = $data['skipfields'];
+        $input = [
+            '--fromTable' => ' ',
+        ];
+        if (!empty($prefix)) {
+            $input['--prefix'] = $prefix;
+        }
+        if (!empty($skipfields)) {
+            $input['--ignoreFields'] = $skipfields;
+        }
+
+        foreach ($tables as $key => $table) {
+            $modelName = str_replace(' ', '', Str::title(str_replace('_', ' ', Str::singular($table))));
+            $input['model'] = $modelName;
+            $input['--tableName'] = $table;
+            
+            Artisan::call($data['commandType'], $input);
+        }
+     
         return Response::json(['message' => 'Files created successfully'], 200);
     }
 
